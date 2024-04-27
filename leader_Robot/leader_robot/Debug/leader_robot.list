@@ -1782,7 +1782,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  80013b8:	4293      	cmp	r3, r2
  80013ba:	f040 80c4 	bne.w	8001546 <HAL_TIM_PeriodElapsedCallback+0x19e>
 		//doc encoder
-		if(count >= 0.1 ){
+		if(count >= 1 ){
  80013be:	4b67      	ldr	r3, [pc, #412]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
  80013c0:	681b      	ldr	r3, [r3, #0]
  80013c2:	2b00      	cmp	r3, #0

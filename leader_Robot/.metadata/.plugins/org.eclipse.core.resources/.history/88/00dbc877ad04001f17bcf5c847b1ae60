@@ -119,7 +119,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if (htim->Instance == TIM3){
 		//doc encoder
-		if(count >= 1 ){
+		if(count >= 0.1 ){
 
 			encoder_value_left = -1*__HAL_TIM_GET_COUNTER(&htim2);
 			encoder_value_right =__HAL_TIM_GET_COUNTER(&htim5);

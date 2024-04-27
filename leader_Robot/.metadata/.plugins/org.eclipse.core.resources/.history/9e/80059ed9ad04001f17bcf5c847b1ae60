@@ -168,8 +168,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	//			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 
 //				return x y phi; !cmd:RUN#x:0.00#y:0.00#phi:0.00#
-				sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
-				HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+//				sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
+//				HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 
 
 				//return PWM
@@ -182,8 +182,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 //			sprintf(data,"!omega:%.2f#phi:%.2f#\n",myRobot.omega,rad_to_degree(myRobot.theta));
 //			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 //			return x y phi; !cmd:RUN#x:0.00#y:0.00#phi:0.00#
-//			sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
-//			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+			sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
+			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 
 			//reset count
 			count=0;
