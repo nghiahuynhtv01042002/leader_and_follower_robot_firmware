@@ -1,0 +1,2 @@
+../Core/Src/decoding_frame.c:9:6:desired_point_init	16	static
+../Core/Src/decoding_frame.c:15:6:split_frame	24	static

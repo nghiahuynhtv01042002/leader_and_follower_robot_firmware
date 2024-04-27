@@ -1,0 +1,2 @@
+../Core/Src/transmit_function.c:11:6:Convert_int32_to_String4	16	static
+../Core/Src/transmit_function.c:17:6:Merge_frame_data_transmit	32	static
