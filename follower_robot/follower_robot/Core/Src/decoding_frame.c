@@ -17,3 +17,6 @@ void split_frame(char *frame, desired_point* my_desired_point) {
     sscanf(frame, "!cmd:%[^#]#x:%f#y:%f#phi:%f#\n", my_desired_point->cmd_d, &my_desired_point->x_d, &my_desired_point->y_d, &my_desired_point->phi_d);
 }
 
+void split_frame_vel(char *frame,desired_point* my_desired_point){
+	sscanf(frame,"!cmd:%[^#]#v_r:%f#v_l:%f#\n",my_desired_point->cmd_d,&my_desired_point->v_r,&my_desired_point->v_l);
+}

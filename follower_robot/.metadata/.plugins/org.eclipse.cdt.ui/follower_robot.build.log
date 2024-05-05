@@ -1,10 +1,10 @@
-22:39:28 **** Incremental Build of configuration Debug for project follower_robot ****
+21:35:46 **** Incremental Build of configuration Debug for project follower_robot ****
 make -j8 all 
 arm-none-eabi-size  follower_robot.elf 
    text	   data	    bss	    dec	    hex	filename
-  53736	    496	   2680	  56912	   de50	follower_robot.elf
+  52400	    480	   2672	  55552	   d900	follower_robot.elf
 Finished building: default.size.stdout
  
 
-22:39:29 Build Finished. 0 errors, 0 warnings. (took 469ms)
+21:35:46 Build Finished. 0 errors, 0 warnings. (took 548ms)
 

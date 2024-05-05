@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  00017c0b  00000000  00000000  0003258a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00010013  00000000  00000000  0004a195  2**0
+ 18 .debug_line   0001000e  00000000  00000000  0004a195  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00090b3a  00000000  00000000  0005a1a8  2**0
+ 19 .debug_str    00090b3a  00000000  00000000  0005a1a3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000055dc  00000000  00000000  000eace4  2**2
+ 20 .debug_frame  000055dc  00000000  00000000  000eace0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000080  00000000  00000000  000f02c0  2**0
+ 21 .debug_line_str 00000080  00000000  00000000  000f02bc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1780,13 +1780,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  80013b4:	681b      	ldr	r3, [r3, #0]
  80013b6:	4a68      	ldr	r2, [pc, #416]	; (8001558 <HAL_TIM_PeriodElapsedCallback+0x1b0>)
  80013b8:	4293      	cmp	r3, r2
- 80013ba:	f040 80c4 	bne.w	8001546 <HAL_TIM_PeriodElapsedCallback+0x19e>
+ 80013ba:	f040 80c1 	bne.w	8001540 <HAL_TIM_PeriodElapsedCallback+0x198>
 		//doc encoder
 		if(count >= 1 ){
  80013be:	4b67      	ldr	r3, [pc, #412]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
  80013c0:	681b      	ldr	r3, [r3, #0]
  80013c2:	2b00      	cmp	r3, #0
- 80013c4:	f340 80ba 	ble.w	800153c <HAL_TIM_PeriodElapsedCallback+0x194>
+ 80013c4:	f340 80b7 	ble.w	8001536 <HAL_TIM_PeriodElapsedCallback+0x18e>
 
 			encoder_value_left = -1*__HAL_TIM_GET_COUNTER(&htim2);
  80013c8:	4b65      	ldr	r3, [pc, #404]	; (8001560 <HAL_TIM_PeriodElapsedCallback+0x1b8>)
@@ -1906,84 +1906,79 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  80014c0:	4b35      	ldr	r3, [pc, #212]	; (8001598 <HAL_TIM_PeriodElapsedCallback+0x1f0>)
  80014c2:	2200      	movs	r2, #0
  80014c4:	601a      	str	r2, [r3, #0]
-			//return PWM
 //			sprintf(data,"!W_L_PWM:%.2f#W_R_PWM:%.2f#\n",myRobot.v_l_PWM,myRobot.v_r_PWM);
 //			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 
-
+			//todo
+			// only send data when status is running
 			if(strcmp(myRobot.cmd,"RUN")== 0 ){
  80014c6:	4935      	ldr	r1, [pc, #212]	; (800159c <HAL_TIM_PeriodElapsedCallback+0x1f4>)
  80014c8:	4835      	ldr	r0, [pc, #212]	; (80015a0 <HAL_TIM_PeriodElapsedCallback+0x1f8>)
  80014ca:	f7fe fe89 	bl	80001e0 <strcmp>
- 80014ce:	4603      	mov	r3, r0
- 80014d0:	2b00      	cmp	r3, #0
- 80014d2:	d130      	bne.n	8001536 <HAL_TIM_PeriodElapsedCallback+0x18e>
-				//returm diff encoder value
-	//			sprintf(data,"!L_diff:%d#R_diff:%d#\n",encoder_difference_left,encoder_difference_right);
-	//			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
-
-//				return x y phi; !cmd:RUN#x:0.00#y:0.00#phi:0.00#
-				sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
- 80014d4:	4b2b      	ldr	r3, [pc, #172]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
- 80014d6:	681b      	ldr	r3, [r3, #0]
- 80014d8:	4618      	mov	r0, r3
- 80014da:	f7ff f84d 	bl	8000578 <__aeabi_f2d>
- 80014de:	4604      	mov	r4, r0
- 80014e0:	460d      	mov	r5, r1
- 80014e2:	4b28      	ldr	r3, [pc, #160]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
- 80014e4:	685b      	ldr	r3, [r3, #4]
- 80014e6:	4618      	mov	r0, r3
- 80014e8:	f7ff f846 	bl	8000578 <__aeabi_f2d>
- 80014ec:	4680      	mov	r8, r0
- 80014ee:	4689      	mov	r9, r1
- 80014f0:	4b24      	ldr	r3, [pc, #144]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
- 80014f2:	edd3 7a02 	vldr	s15, [r3, #8]
- 80014f6:	eeb0 0a67 	vmov.f32	s0, s15
- 80014fa:	f000 fd29 	bl	8001f50 <rad_to_degree>
- 80014fe:	ee10 3a10 	vmov	r3, s0
- 8001502:	4618      	mov	r0, r3
- 8001504:	f7ff f838 	bl	8000578 <__aeabi_f2d>
- 8001508:	4602      	mov	r2, r0
- 800150a:	460b      	mov	r3, r1
- 800150c:	e9cd 2304 	strd	r2, r3, [sp, #16]
- 8001510:	e9cd 8902 	strd	r8, r9, [sp, #8]
- 8001514:	e9cd 4500 	strd	r4, r5, [sp]
- 8001518:	4a21      	ldr	r2, [pc, #132]	; (80015a0 <HAL_TIM_PeriodElapsedCallback+0x1f8>)
- 800151a:	4922      	ldr	r1, [pc, #136]	; (80015a4 <HAL_TIM_PeriodElapsedCallback+0x1fc>)
- 800151c:	4822      	ldr	r0, [pc, #136]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
- 800151e:	f005 fe1d 	bl	800715c <siprintf>
-				HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
- 8001522:	4821      	ldr	r0, [pc, #132]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
- 8001524:	f7fe febc 	bl	80002a0 <strlen>
- 8001528:	4603      	mov	r3, r0
- 800152a:	b29b      	uxth	r3, r3
- 800152c:	461a      	mov	r2, r3
- 800152e:	491e      	ldr	r1, [pc, #120]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
- 8001530:	481e      	ldr	r0, [pc, #120]	; (80015ac <HAL_TIM_PeriodElapsedCallback+0x204>)
- 8001532:	f003 fe97 	bl	8005264 <HAL_UART_Transmit_DMA>
-//			return x y phi; !cmd:RUN#x:0.00#y:0.00#phi:0.00#
-//			sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
+//				HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+			}
+//			sprintf(data,"!omega:%.2f#phi:%.2f#\n",myRobot.omega,rad_to_degree(myRobot.theta));
 //			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+//			return x y phi; !cmd:RUN#x:0.00#y:0.00#phi:0.00#
+			sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
+ 80014ce:	4b2d      	ldr	r3, [pc, #180]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
+ 80014d0:	681b      	ldr	r3, [r3, #0]
+ 80014d2:	4618      	mov	r0, r3
+ 80014d4:	f7ff f850 	bl	8000578 <__aeabi_f2d>
+ 80014d8:	4604      	mov	r4, r0
+ 80014da:	460d      	mov	r5, r1
+ 80014dc:	4b29      	ldr	r3, [pc, #164]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
+ 80014de:	685b      	ldr	r3, [r3, #4]
+ 80014e0:	4618      	mov	r0, r3
+ 80014e2:	f7ff f849 	bl	8000578 <__aeabi_f2d>
+ 80014e6:	4680      	mov	r8, r0
+ 80014e8:	4689      	mov	r9, r1
+ 80014ea:	4b26      	ldr	r3, [pc, #152]	; (8001584 <HAL_TIM_PeriodElapsedCallback+0x1dc>)
+ 80014ec:	edd3 7a02 	vldr	s15, [r3, #8]
+ 80014f0:	eeb0 0a67 	vmov.f32	s0, s15
+ 80014f4:	f000 fd2c 	bl	8001f50 <rad_to_degree>
+ 80014f8:	ee10 3a10 	vmov	r3, s0
+ 80014fc:	4618      	mov	r0, r3
+ 80014fe:	f7ff f83b 	bl	8000578 <__aeabi_f2d>
+ 8001502:	4602      	mov	r2, r0
+ 8001504:	460b      	mov	r3, r1
+ 8001506:	e9cd 2304 	strd	r2, r3, [sp, #16]
+ 800150a:	e9cd 8902 	strd	r8, r9, [sp, #8]
+ 800150e:	e9cd 4500 	strd	r4, r5, [sp]
+ 8001512:	4a23      	ldr	r2, [pc, #140]	; (80015a0 <HAL_TIM_PeriodElapsedCallback+0x1f8>)
+ 8001514:	4923      	ldr	r1, [pc, #140]	; (80015a4 <HAL_TIM_PeriodElapsedCallback+0x1fc>)
+ 8001516:	4824      	ldr	r0, [pc, #144]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
+ 8001518:	f005 fe20 	bl	800715c <siprintf>
+			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+ 800151c:	4822      	ldr	r0, [pc, #136]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
+ 800151e:	f7fe febf 	bl	80002a0 <strlen>
+ 8001522:	4603      	mov	r3, r0
+ 8001524:	b29b      	uxth	r3, r3
+ 8001526:	461a      	mov	r2, r3
+ 8001528:	491f      	ldr	r1, [pc, #124]	; (80015a8 <HAL_TIM_PeriodElapsedCallback+0x200>)
+ 800152a:	4820      	ldr	r0, [pc, #128]	; (80015ac <HAL_TIM_PeriodElapsedCallback+0x204>)
+ 800152c:	f003 fe9a 	bl	8005264 <HAL_UART_Transmit_DMA>
 
 			//reset count
 			count=0;
- 8001536:	4b09      	ldr	r3, [pc, #36]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
- 8001538:	2200      	movs	r2, #0
- 800153a:	601a      	str	r2, [r3, #0]
-
+ 8001530:	4b0a      	ldr	r3, [pc, #40]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
+ 8001532:	2200      	movs	r2, #0
+ 8001534:	601a      	str	r2, [r3, #0]
 		}
 		count++;
- 800153c:	4b07      	ldr	r3, [pc, #28]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
- 800153e:	681b      	ldr	r3, [r3, #0]
- 8001540:	3301      	adds	r3, #1
- 8001542:	4a06      	ldr	r2, [pc, #24]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
- 8001544:	6013      	str	r3, [r2, #0]
+ 8001536:	4b09      	ldr	r3, [pc, #36]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
+ 8001538:	681b      	ldr	r3, [r3, #0]
+ 800153a:	3301      	adds	r3, #1
+ 800153c:	4a07      	ldr	r2, [pc, #28]	; (800155c <HAL_TIM_PeriodElapsedCallback+0x1b4>)
+ 800153e:	6013      	str	r3, [r2, #0]
 	}
 }
- 8001546:	bf00      	nop
- 8001548:	3708      	adds	r7, #8
- 800154a:	46bd      	mov	sp, r7
- 800154c:	e8bd 83b0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, pc}
+ 8001540:	bf00      	nop
+ 8001542:	3708      	adds	r7, #8
+ 8001544:	46bd      	mov	sp, r7
+ 8001546:	e8bd 83b0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, pc}
+ 800154a:	bf00      	nop
+ 800154c:	f3af 8000 	nop.w
  8001550:	eb851eb8 	.word	0xeb851eb8
  8001554:	3f9eb851 	.word	0x3f9eb851
  8001558:	40000400 	.word	0x40000400
@@ -2450,7 +2445,7 @@ int main(void)
  800191e:	639a      	str	r2, [r3, #56]	; 0x38
  8001920:	e00f      	b.n	8001942 <main+0x392>
 			  }
-			  //counter Clokwise
+			  //counter Clockwise
 			  else{
 				  __HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,0);//
  8001922:	4b2a      	ldr	r3, [pc, #168]	; (80019cc <main+0x41c>)

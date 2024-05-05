@@ -1,4 +1,4 @@
-22:50:22 **** Incremental Build of configuration Debug for project leader_robot ****
+21:37:39 **** Incremental Build of configuration Debug for project leader_robot ****
 make -j8 all 
 arm-none-eabi-size  leader_robot.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size  leader_robot.elf
 Finished building: default.size.stdout
  
 
-22:50:22 Build Finished. 0 errors, 0 warnings. (took 255ms)
+21:37:40 Build Finished. 0 errors, 0 warnings. (took 350ms)
 

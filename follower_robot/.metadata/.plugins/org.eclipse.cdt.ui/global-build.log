@@ -1,37 +1,14 @@
-22:28:49 **** Incremental Build of configuration Debug for project follower_robot ****
+21:35:42 **** Incremental Build of configuration Debug for project follower_robot ****
 make -j8 all 
-arm-none-eabi-gcc -o "follower_robot.elf" @"objects.list"   -mcpu=cortex-m4 -T"G:\stm32cubeide\fileSave_cubeIDE\final_capstone_project\follower_robot\follower_robot\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="follower_robot.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: follower_robot.elf
- 
 arm-none-eabi-size  follower_robot.elf 
-arm-none-eabi-objdump -h -S follower_robot.elf  > "follower_robot.list"
    text	   data	    bss	    dec	    hex	filename
-  53736	    496	   2680	  56912	   de50	follower_robot.elf
-arm-none-eabi-objcopy  -O ihex follower_robot.elf  "follower_robot.hex"
+  52400	    480	   2672	  55552	   d900	follower_robot.elf
 Finished building: default.size.stdout
  
-Finished building: follower_robot.hex
- 
-Finished building: follower_robot.list
- 
-22:29:35 **** Incremental Build of configuration Debug for project follower_robot ****
+21:35:46 **** Incremental Build of configuration Debug for project follower_robot ****
 make -j8 all 
 arm-none-eabi-size  follower_robot.elf 
    text	   data	    bss	    dec	    hex	filename
-  53736	    496	   2680	  56912	   de50	follower_robot.elf
-Finished building: default.size.stdout
- 
-22:30:07 **** Incremental Build of configuration Debug for project follower_robot ****
-make -j8 all 
-arm-none-eabi-size  follower_robot.elf 
-   text	   data	    bss	    dec	    hex	filename
-  53736	    496	   2680	  56912	   de50	follower_robot.elf
-Finished building: default.size.stdout
- 
-22:39:28 **** Incremental Build of configuration Debug for project follower_robot ****
-make -j8 all 
-arm-none-eabi-size  follower_robot.elf 
-   text	   data	    bss	    dec	    hex	filename
-  53736	    496	   2680	  56912	   de50	follower_robot.elf
+  52400	    480	   2672	  55552	   d900	follower_robot.elf
 Finished building: default.size.stdout
  

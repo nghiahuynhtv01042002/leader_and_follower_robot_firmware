@@ -15,9 +15,11 @@ typedef struct{
 	float x_d;
 	float y_d;
 	float phi_d;
+	float v_r;
+	float v_l;
 }desired_point;
 void desired_point_init(desired_point* my_desired_point);
 void split_frame(char *frame,desired_point* my_desired_point);
-
+void split_frame_vel(char *frame,desired_point* my_desired_point);
 
 #endif /* INC_DECODING_FRAME_H_ */
