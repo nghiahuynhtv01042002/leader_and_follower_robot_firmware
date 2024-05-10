@@ -50,7 +50,7 @@ uint8_t data_right[11] ="";
 uint8_t data_left[11] ="";
 
 int  en_run = 0;
-int en_PID = 1;
+int en_PID = 0;
 int count =0;
 float phid_pid = 0.0;
 float distance_to_goals = 0;
@@ -172,8 +172,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			sprintf(data,"!cmd:%s#x:%.2f#y:%.2f#phi:%.2f#\n",myRobot.cmd,myRobot.x,myRobot.y,rad_to_degree(myRobot.theta));
 			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 
-//			sprintf(data,"!cmd:%s#v_r:%.2f#v_l:%.2f#\n",my_desired_point.cmd_d,my_desired_point.v_r,my_desired_point.v_l);
+			//return PWM
+//			sprintf(data,"!W_L_PWM:%.2f#W_R_PWM:%.2f#\n",myRobot.v_l_PWM,myRobot.v_r_PWM);
 //			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+
+//			sprintf(data,"!cmd:%s#v_r:%.2f#v_l:%.2f#\n",myRobot.cmd,myRobot.v_r,myRobot.v_l);
+//			HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
+
 			//reset count
 			count=0;
 		}
@@ -284,30 +289,57 @@ int main(void)
 	  		  myRobot.v_r = my_desired_point.v_r;
 	  		  myRobot.v_l = my_desired_point.v_l;
 		  	  //limint vr vl
-		  	  if(abs(myRobot.v_r) > v_max){
-		  		  if(myRobot.v_r >= 0 )
-		  			  myRobot.v_r  = (float) v_max;
-		  		  else
-		  			  myRobot.v_r  = (float)-1* v_max;
-		  	  }
-		  	  else if(abs(myRobot.v_r) <v_min ){
-		  		  if(myRobot.v_r >= 0 )
-		  			  myRobot.v_r  = (float)v_min;
-		  		  else
-		  			  myRobot.v_r = (float)-v_min ;
-		  	  }
-		  	  if(abs(myRobot.v_l) > v_max){
-		  		  if(myRobot.v_l > 0 )
-		  			  myRobot.v_l  = (float)v_max;
-		  		  else
-		  			  myRobot.v_l  = (float)-1* v_max;
-		  	  }
-		  	  else if(abs(myRobot.v_l) < v_min ){
-		  		  if(myRobot.v_l > 0 )
-		  			  myRobot.v_l  =(float) v_min;
-		  		  else
-		  			  myRobot.v_l = (float)-v_min ;
-		  	  }
+	  		  if(myRobot.v_r >= 0){
+	  			  if(myRobot.v_r > v_max){
+	  				  myRobot.v_r = v_max;
+	  			  }
+	  			  else if(myRobot.v_r < v_min ){
+	  				myRobot.v_r  = v_min;
+	  			  }
+	  		  }
+	  		  else if(myRobot.v_r < 0){
+	  			  if(-myRobot.v_r > v_max){
+	  				  myRobot.v_r = -v_max;
+	  			  }
+	  			  else if(-myRobot.v_r < v_min ){
+	  				myRobot.v_r  = -v_min;
+	  			  }
+	  		  }
+//		  	  if(abs(myRobot.v_r) > v_max){
+//		  		  if(myRobot.v_r >= 0 )
+//		  			  myRobot.v_r  = (float) v_max;
+//		  		  else
+//		  			  myRobot.v_r  = (float)-1* v_max;
+//		  	  }
+//
+//		  	  else if(abs(myRobot.v_r) < v_min ){
+//		  		  if(myRobot.v_r >= 0 )
+//		  			  myRobot.v_r  = (float)v_min;
+//		  		  else
+//		  			  myRobot.v_r = (float)-1*v_min ;
+//		  	  }
+//		  	  else{
+//		  		  myRobot.v_r = my_desired_point.v_r;
+//
+//		  	  }
+//
+//		  	  if(abs(myRobot.v_l) > v_max){
+//		  		  if(myRobot.v_l > 0 )
+//		  			  myRobot.v_l  = (float)v_max;
+//		  		  else
+//		  			  myRobot.v_l  = (float)-1* v_max;
+//		  	  }
+//		  	  else if(abs(myRobot.v_l) < v_min ){
+//		  		  if(myRobot.v_l > 0 )
+//		  			  myRobot.v_l  =(float) v_min;
+//		  		  else
+//		  			  myRobot.v_l = (float)-1*v_min ;
+//		  	  }
+//		  	  else{
+//		  		myRobot.v_r = my_desired_point.v_r;
+//		  	  }
+//		  	  sprintf(data,"!cmd:%s#v_r:%.2f#v_l:%.2f#\n",myRobot.cmd,myRobot.v_r,myRobot.v_l);
+//		  	  HAL_UART_Transmit_DMA(&huart2, (uint8_t*)data,strlen(data));
 		  	  // limit max min PWM for motor
 		  	  myRobot.v_l_PWM = mps_to_PWM(myRobot.v_l);
 		  	  myRobot.v_r_PWM = mps_to_PWM(myRobot.v_r );

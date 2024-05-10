@@ -238,7 +238,8 @@ int main(void)
   HAL_UART_Receive_IT(&huart2, &Rx, 1);
   //ref KP KI KD
 //  pid_set_Kp_Ki_Kd(&hpid,1.55, 0.055, 0.025,0.1);
-  pid_set_Kp_Ki_Kd(&hpid, 5, 0.13, 0.025,0.1);
+//  pid_set_Kp_Ki_Kd(&hpid, 5, 0.13, 0.025,0.1);
+  pid_set_Kp_Ki_Kd(&hpid, 10, 1.5, 0.025,0.1);
   //start PWM TIM1; chanel 1,2 for left motor ; chanel 3,4 for right  motor
   //chanel 1 PE9 ;chanel 2 PE11; chanel 3 PE23 ; chanel 4 PE14;
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
@@ -297,36 +298,54 @@ int main(void)
 			  hpid.current = myRobot.theta;
 		  	  //calculate output PID
 		  	  myRobot.omega = calculate_pid_output(&hpid);//rad/s
-
+//		  	  myRobot.v = 12*(phid_pid-myRobot.theta);
 		  	  //calspeed : write a function in pid_module to call angular vel of 2 motor anf convert it to PWM signal
 		  	  myRobot.v_r = cal_speed_right_motor(myRobot.omega, myRobot.v);// m/s
 		  	  myRobot.v_l = cal_speed_left_motor(myRobot.omega, myRobot.v);//m/s
 
 		  	  //limint vr vl
-		  	  if(abs(myRobot.v_r) > v_max){
-		  		  if(myRobot.v_r >= 0 )
-		  			  myRobot.v_r  = (float) v_max;
-		  		  else
-		  			  myRobot.v_r  = (float)-1* v_max;
-		  	  }
-		  	  else if(abs(myRobot.v_r) <v_min ){
-		  		  if(myRobot.v_r >= 0 )
-		  			  myRobot.v_r  = (float)v_min;
-		  		  else
-		  			  myRobot.v_r = (float)-v_min ;
-		  	  }
-		  	  if(abs(myRobot.v_l) > v_max){
-		  		  if(myRobot.v_l > 0 )
-		  			  myRobot.v_l  = (float)v_max;
-		  		  else
-		  			  myRobot.v_l  = (float)-1* v_max;
-		  	  }
-		  	  else if(abs(myRobot.v_l) < v_min ){
-		  		  if(myRobot.v_l > 0 )
-		  			  myRobot.v_l  =(float) v_min;
-		  		  else
-		  			  myRobot.v_l = (float)-v_min ;
-		  	  }
+//		  	  if(abs(myRobot.v_r) > v_max){
+//		  		  if(myRobot.v_r >= 0 )
+//		  			  myRobot.v_r  = (float) v_max;
+//		  		  else
+//		  			  myRobot.v_r  = (float)-1* v_max;
+//		  	  }
+//		  	  else if(abs(myRobot.v_r) <v_min ){
+//		  		  if(myRobot.v_r >= 0 )
+//		  			  myRobot.v_r  = (float)v_min;
+//		  		  else
+//		  			  myRobot.v_r = (float)-v_min ;
+//		  	  }
+//		  	  if(abs(myRobot.v_l) > v_max){
+//		  		  if(myRobot.v_l > 0 )
+//		  			  myRobot.v_l  = (float)v_max;
+//		  		  else
+//		  			  myRobot.v_l  = (float)-1* v_max;
+//		  	  }
+//		  	  else if(abs(myRobot.v_l) < v_min ){
+//		  		  if(myRobot.v_l > 0 )
+//		  			  myRobot.v_l  =(float) v_min;
+//		  		  else
+//		  			  myRobot.v_l = (float)-v_min ;
+//		  	  }
+		  	  //set limit ưay2
+	  		  if(myRobot.v_r >= 0){
+	  			  if(myRobot.v_r > v_max){
+	  				  myRobot.v_r = v_max;
+	  			  }
+	  			  else if(myRobot.v_r < v_min ){
+	  				myRobot.v_r  = v_min;
+	  			  }
+	  		  }
+	  		  else if(myRobot.v_r < 0){
+	  			  if(-myRobot.v_r > v_max){
+	  				  myRobot.v_r = -v_max;
+	  			  }
+	  			  else if(-myRobot.v_r < v_min ){
+	  				myRobot.v_r  = -v_min;
+	  			  }
+	  		  }
+
 		  	  // limit max min PWM for motor
 		  	  myRobot.v_l_PWM = mps_to_PWM(myRobot.v_l);
 		  	  myRobot.v_r_PWM = mps_to_PWM(myRobot.v_r );

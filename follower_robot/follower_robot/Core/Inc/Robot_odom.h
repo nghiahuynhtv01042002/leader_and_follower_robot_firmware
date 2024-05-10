@@ -20,8 +20,8 @@
 #define PWM_max 400
 #define PWM_min 350
 
-#define v_max 0.2
-#define v_min 0.0
+#define v_max 0.27
+#define v_min 0.12
 typedef struct {
     float x;
     float y;

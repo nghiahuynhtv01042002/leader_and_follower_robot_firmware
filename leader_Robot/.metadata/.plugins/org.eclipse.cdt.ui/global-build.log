@@ -1,14 +1,37 @@
-21:37:35 **** Incremental Build of configuration Debug for project leader_robot ****
+21:18:17 **** Incremental Build of configuration Debug for project leader_robot ****
 make -j8 all 
+arm-none-eabi-gcc "../Core/Src/Robot_odom.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Robot_odom.d" -MT"Core/Src/Robot_odom.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Robot_odom.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Robot_odom.c: In function 'init_Robot':
+../Core/Src/Robot_odom.c:30:5: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
+   30 |     strcpy(robot->cmd,"STP");
+      |     ^~~~~~
+../Core/Src/Robot_odom.c:8:1: note: include '<string.h>' or provide a declaration of 'strcpy'
+    7 | #include "Robot_odom.h"
+  +++ |+#include <string.h>
+    8 | 
+../Core/Src/Robot_odom.c:30:5: warning: incompatible implicit declaration of built-in function 'strcpy' [-Wbuiltin-declaration-mismatch]
+   30 |     strcpy(robot->cmd,"STP");
+      |     ^~~~~~
+../Core/Src/Robot_odom.c:30:5: note: include '<string.h>' or provide a declaration of 'strcpy'
+arm-none-eabi-gcc -o "leader_robot.elf" @"objects.list"   -mcpu=cortex-m4 -T"G:\stm32cubeide\fileSave_cubeIDE\final_capstone_project\leader_Robot\leader_robot\STM32F411VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="leader_robot.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: leader_robot.elf
+ 
 arm-none-eabi-size  leader_robot.elf 
+arm-none-eabi-objdump -h -S leader_robot.elf  > "leader_robot.list"
    text	   data	    bss	    dec	    hex	filename
-  53848	    496	   2680	  57024	   dec0	leader_robot.elf
+  53792	    496	   2680	  56968	   de88	leader_robot.elf
+arm-none-eabi-objcopy  -O ihex leader_robot.elf  "leader_robot.hex"
 Finished building: default.size.stdout
  
-21:37:39 **** Incremental Build of configuration Debug for project leader_robot ****
+Finished building: leader_robot.hex
+ 
+Finished building: leader_robot.list
+ 
+21:18:20 **** Incremental Build of configuration Debug for project leader_robot ****
 make -j8 all 
 arm-none-eabi-size  leader_robot.elf 
    text	   data	    bss	    dec	    hex	filename
-  53848	    496	   2680	  57024	   dec0	leader_robot.elf
+  53792	    496	   2680	  56968	   de88	leader_robot.elf
 Finished building: default.size.stdout
  

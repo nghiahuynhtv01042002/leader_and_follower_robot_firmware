@@ -11,12 +11,12 @@
 /// initial robot parameter
 
 void init_Robot(Robot* robot){
-    robot->x = 0;
-    robot->y = 0;
-    robot->theta = 0;
+    robot->x = -0.3;
+    robot->y = 0.0;
+    robot->theta = 0.0;
     robot->omega = 0;
-    robot->v = 0.05;//60rpm = 0.2041 50 = 0.17
-//    robot->v = 0.0;//60rpm = 0.2041 50 = 0.17
+//    robot->v = 0.05;//60rpm = 0.2041 50 = 0.17
+    robot->v = 0.0;//60rpm = 0.2041 50 = 0.17
 
     robot->v_r = 0;
     robot->v_l = 0;
