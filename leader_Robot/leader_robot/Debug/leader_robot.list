@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  00017c0b  00000000  00000000  0003258a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000ffe2  00000000  00000000  0004a195  2**0
+ 18 .debug_line   0000ffe0  00000000  00000000  0004a195  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    00090b3a  00000000  00000000  0005a177  2**0
+ 19 .debug_str    00090b3a  00000000  00000000  0005a175  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000055dc  00000000  00000000  000eacb4  2**2
+ 20 .debug_frame  000055dc  00000000  00000000  000eacb0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000080  00000000  00000000  000f0290  2**0
+ 21 .debug_line_str 00000080  00000000  00000000  000f028c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1361,7 +1361,7 @@ void init_Robot(Robot* robot){
  8001040:	687b      	ldr	r3, [r7, #4]
  8001042:	f04f 0200 	mov.w	r2, #0
  8001046:	619a      	str	r2, [r3, #24]
-//    robot->v = 0.05;//60rpm = 0.2041 50 = 0.17
+//    robot->v = 0.07;//60rpm = 0.2041 50 = 0.17
     robot->v = 0.1;//60rpm = 0.2041 50 = 0.17
  8001048:	687b      	ldr	r3, [r7, #4]
  800104a:	4a14      	ldr	r2, [pc, #80]	; (800109c <init_Robot+0x7c>)
@@ -2067,11 +2067,11 @@ int main(void)
   //ref KP KI KD
 //  pid_set_Kp_Ki_Kd(&hpid,1.55, 0.055, 0.025,0.1);
 //  pid_set_Kp_Ki_Kd(&hpid, 5, 0.13, 0.025,0.1);
-  pid_set_Kp_Ki_Kd(&hpid, 10, 1.5, 0.025,0.1);
+  pid_set_Kp_Ki_Kd(&hpid, 17, 1.5, 0.03,0.1);
  80015ee:	eddf 1aae 	vldr	s3, [pc, #696]	; 80018a8 <main+0x2f8>
  80015f2:	ed9f 1aae 	vldr	s2, [pc, #696]	; 80018ac <main+0x2fc>
  80015f6:	eef7 0a08 	vmov.f32	s1, #120	; 0x3fc00000  1.5
- 80015fa:	eeb2 0a04 	vmov.f32	s0, #36	; 0x41200000  10.0
+ 80015fa:	eeb3 0a01 	vmov.f32	s0, #49	; 0x41880000  17.0
  80015fe:	48ac      	ldr	r0, [pc, #688]	; (80018b0 <main+0x300>)
  8001600:	f000 fcda 	bl	8001fb8 <pid_set_Kp_Ki_Kd>
   //start PWM TIM1; chanel 1,2 for left motor ; chanel 3,4 for right  motor
@@ -2227,7 +2227,6 @@ int main(void)
  800170e:	eef0 7a40 	vmov.f32	s15, s0
  8001712:	4b61      	ldr	r3, [pc, #388]	; (8001898 <main+0x2e8>)
  8001714:	edc3 7a06 	vstr	s15, [r3, #24]
-//		  	  myRobot.v = 12*(phid_pid-myRobot.theta);
 		  	  //calspeed : write a function in pid_module to call angular vel of 2 motor anf convert it to PWM signal
 		  	  myRobot.v_r = cal_speed_right_motor(myRobot.omega, myRobot.v);// m/s
  8001718:	4b5f      	ldr	r3, [pc, #380]	; (8001898 <main+0x2e8>)
@@ -2251,10 +2250,8 @@ int main(void)
  8001752:	eef0 7a40 	vmov.f32	s15, s0
  8001756:	4b50      	ldr	r3, [pc, #320]	; (8001898 <main+0x2e8>)
  8001758:	edc3 7a04 	vstr	s15, [r3, #16]
-//		  			  myRobot.v_l  =(float) v_min;
-//		  		  else
-//		  			  myRobot.v_l = (float)-v_min ;
-//		  	  }
+
+
 		  	  //set limit ưay2
 	  		  if(myRobot.v_r >= 0){
  800175c:	4b4e      	ldr	r3, [pc, #312]	; (8001898 <main+0x2e8>)
@@ -2404,7 +2401,7 @@ int main(void)
  80018a0:	20000204 	.word	0x20000204
  80018a4:	200003f4 	.word	0x200003f4
  80018a8:	3dcccccd 	.word	0x3dcccccd
- 80018ac:	3ccccccd 	.word	0x3ccccccd
+ 80018ac:	3cf5c28f 	.word	0x3cf5c28f
  80018b0:	200004d0 	.word	0x200004d0
  80018b4:	200002d4 	.word	0x200002d4
  80018b8:	2000031c 	.word	0x2000031c

@@ -15,7 +15,7 @@ void init_Robot(Robot* robot){
     robot->y = 0;
     robot->theta = 0;
     robot->omega = 0;
-//    robot->v = 0.05;//60rpm = 0.2041 50 = 0.17
+//    robot->v = 0.07;//60rpm = 0.2041 50 = 0.17
     robot->v = 0.1;//60rpm = 0.2041 50 = 0.17
 //    robot->v = 0.0;//60rpm = 0.2041 50 = 0.17
 

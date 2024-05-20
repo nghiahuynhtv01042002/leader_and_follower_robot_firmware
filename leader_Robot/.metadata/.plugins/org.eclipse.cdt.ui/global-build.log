@@ -1,7 +1,6 @@
-21:18:17 **** Incremental Build of configuration Debug for project leader_robot ****
+18:20:01 **** Incremental Build of configuration Debug for project leader_robot ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/Robot_odom.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Robot_odom.d" -MT"Core/Src/Robot_odom.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Robot_odom.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/Robot_odom.c: In function 'init_Robot':
 ../Core/Src/Robot_odom.c:30:5: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
    30 |     strcpy(robot->cmd,"STP");
@@ -19,16 +18,26 @@ Finished building target: leader_robot.elf
  
 arm-none-eabi-size  leader_robot.elf 
 arm-none-eabi-objdump -h -S leader_robot.elf  > "leader_robot.list"
+arm-none-eabi-objcopy  -O ihex leader_robot.elf  "leader_robot.hex"
    text	   data	    bss	    dec	    hex	filename
   53792	    496	   2680	  56968	   de88	leader_robot.elf
-arm-none-eabi-objcopy  -O ihex leader_robot.elf  "leader_robot.hex"
 Finished building: default.size.stdout
  
 Finished building: leader_robot.hex
  
 Finished building: leader_robot.list
  
-21:18:20 **** Incremental Build of configuration Debug for project leader_robot ****
+
+18:20:02 Build Finished. 0 errors, 2 warnings. (took 1s.48ms)
+
+18:20:03 **** Incremental Build of configuration Debug for project leader_robot ****
+make -j8 all 
+arm-none-eabi-size  leader_robot.elf 
+   text	   data	    bss	    dec	    hex	filename
+  53792	    496	   2680	  56968	   de88	leader_robot.elf
+Finished building: default.size.stdout
+ 
+18:20:07 **** Incremental Build of configuration Debug for project leader_robot ****
 make -j8 all 
 arm-none-eabi-size  leader_robot.elf 
    text	   data	    bss	    dec	    hex	filename
